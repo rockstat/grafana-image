@@ -10,3 +10,4 @@ RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install ryantxu-ajax-panel \
     && grafana-cli plugins install natel-discrete-panel
 
+COPY grafana.ini /etc/grafana/
