@@ -3,7 +3,7 @@ dist: trusty
 
 env:
   global:
-    - PROJECT_NAME=rockstat-grafana
+    - PROJECT_NAME=grafana
     - ORG=rockstat
     - IMAGE_NAME=$ORG/$PROJECT_NAME
 
