@@ -11,7 +11,7 @@ RUN apt update -yqq && apt install -yqq gosu
 RUN mkdir -p ${_TEMP_STORE}/dash/ && mkdir -p ${_TEMP_STORE}/plugins/
 
 COPY --chown=grafana:grafana provisioning grafana.ini /etc/grafana/
-COPY --chown=grafana:grafana base_dash.json ${_TEMP_STORE}/dash/
+COPY --chown=grafana:grafana dashboard.json ${_TEMP_STORE}/dash/
 
 RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install grafana-simple-json-datasource \
