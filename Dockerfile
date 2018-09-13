@@ -17,3 +17,9 @@ RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install natel-discrete-panel
     # && grafana-cli plugins install petrslavotinek-carpetplot-panel << not accessible
 
+USER root
+RUN mkdir $GF_PATHS_HOME/plugins
+RUN bash -c 'for f in $(ls -A $GF_PATHS_PLUGINS); do mv -i "$f" $GF_PATHS_HOME/plugins ; done'
+COPY run2.sh run2.sh
+USER grafana
+ENTRYPOINT ["./run2.sh"]
