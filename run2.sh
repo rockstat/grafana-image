@@ -16,7 +16,7 @@ mv ${_TEMP_STORE}/dash ${_DATA}
 
 for f in $(ls -A ${_TEMP_STORE}/plugins); do
     echo "-> ${_TEMP_STORE}/plugins -> ${_PLUGINS}/$f"
-    mv -u "${_TEMP_STORE}/plugins/$f" ${_PLUGINS}
+    mv -u -f "${_TEMP_STORE}/plugins/$f" ${_PLUGINS}
 done
 
 
