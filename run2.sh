@@ -12,11 +12,16 @@ fi
 echo "-> {_PLUGINS}/2: ${_PLUGINS}"
 ls -la $_PLUGINS
 
-mv ${_TEMP_STORE}/dash ${_DATA}
+if [ ! -d "${_DATA}/dash" ]; then
+    mv ${_TEMP_STORE}/dash ${_DATA}
+fi
 
 for f in $(ls -A ${_TEMP_STORE}/plugins); do
     echo "-> ${_TEMP_STORE}/plugins -> ${_PLUGINS}/$f"
-    mv -u -f "${_TEMP_STORE}/plugins/$f" ${_PLUGINS}
+    if [ ! -d "${_PLUGINS}/$f" ]; then
+        echo "-> mv"
+        mv -u -f "${_TEMP_STORE}/plugins/$f" ${_PLUGINS}
+    fi
 done
 
 
