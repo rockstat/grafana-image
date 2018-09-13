@@ -1,12 +1,12 @@
 apiVersion: 1
 
 providers:
-- name: 'default'
+- name: 'dashboards'
   orgId: 1
   folder: ''
   type: file
   disableDeletion: false
   updateIntervalSeconds: 5 #how often Grafana will scan for changed dashboards
   options:
-    path: path: /usr/share/grafana/dash/
+    path: /var/lib/grafana/dash/dashboards.yml
 
