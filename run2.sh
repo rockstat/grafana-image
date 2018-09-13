@@ -1,6 +1,11 @@
 #!/bin/bash -e
 
-mv "$RST_PROV_DIR/plugins/*" "$GF_PATHS_PLUGINS/"
+ls -l /usr/share/grafana_build
+
+mkdir -p "$RST_PROV_DIR/plugins"
+cd "$RST_PROV_DIR/plugins" && mv * "$GF_PATHS_PLUGINS/" && cd -
+
+# mv -t $GF_PATHS_PLUGINS $RST_PROV_DIR/plugins/*
 mv "$RST_PROV_DIR/grafana.ini" "$GF_PATHS_DATA/"
 
 
