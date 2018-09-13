@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_CH",
+      "name": "CH",
       "label": "CH",
       "description": "",
       "type": "datasource",
@@ -74,7 +74,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "60%",
       "format": "short",
@@ -132,7 +132,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "60%",
       "format": "short",
@@ -189,7 +189,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -247,7 +247,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -305,7 +305,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "80%",
       "format": "short",
@@ -368,7 +368,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -460,7 +460,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -551,7 +551,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -610,7 +610,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -778,7 +778,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -949,7 +949,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "decimals": null,
       "fontSize": "80%",
       "format": "short",
@@ -1005,7 +1005,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
@@ -1070,7 +1070,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_CH}",
+      "datasource": "CH",
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
