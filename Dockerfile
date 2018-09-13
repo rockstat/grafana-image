@@ -1,13 +1,11 @@
 FROM grafana/grafana
 
 USER root
-ENV RST_PROV_DIR=/usr/share/provisioning
+ENV RST_PROV_DIR=/usr/share/grafana_build
 RUN mkdir -p "$RST_PROV_DIR"
 
-COPY grafana.ini /etc/grafana/
-COPY datasource.yml /etc/grafana/provisioning/datasources/datasource.yml
-COPY dashboards.yml /etc/grafana/provisioning/dashboards/dashboards.yml
-COPY dashboards /var/lib/grafana
+COPY --chown=grafana:grafana provisioning grafana.ini /etc/grafana/
+COPY --chown=grafana:grafana dashboards "$RST_PROV_DIR"
 
 RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install grafana-simple-json-datasource \
