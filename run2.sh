@@ -15,8 +15,8 @@ fi
 echo "-> {_PLUGINS}/2: ${_PLUGINS}"
 ls -la $_PLUGINS
 
-if [ ! -d "${_DATA}/dash" ]; then
-    mv "${_TEMP_STORE}/dash/dashboard.json" "${_DATA}/dashboards"
+if [ ! -d "${_DATA}/dashboards" ]; then
+    mv "${_TEMP_STORE}/dashboards/dashboard.json" "${_DATA}/dashboards"
 fi
 
 for f in $(ls -A ${_TEMP_STORE}/plugins); do
