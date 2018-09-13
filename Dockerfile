@@ -1,7 +1,7 @@
 FROM grafana/grafana
 
 USER root
-ENV RST_PROV_DIR=/root/provisioning
+ENV RST_PROV_DIR=/usr/share/provisioning
 RUN mkdir -p "$RST_PROV_DIR"
 
 COPY grafana.ini /etc/grafana/
@@ -20,7 +20,7 @@ RUN grafana-cli plugins install grafana-clock-panel \
     # && grafana-cli plugins install petrslavotinek-carpetplot-panel << not accessible
 
 RUN mv "$GF_PATHS_PLUGINS" "$RST_PROV_DIR"
-RUN chown -R grafana:grafana "$GF_PATHS_DATA"
+RUN chown -R grafana:grafana "$RST_PROV_DIR"
 
 
 USER grafana
