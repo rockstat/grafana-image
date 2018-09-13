@@ -10,3 +10,4 @@ RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install natel-discrete-panel
     # && grafana-cli plugins install petrslavotinek-carpetplot-panel << not accessible
 COPY grafana.ini /etc/grafana/
+COPY datasource.yml /etc/grafana/provisioning/datasources/datasource.yml
