@@ -1,8 +1,18 @@
 FROM grafana/grafana
 
-RUN mkdir $GF_PATHS_DATA/dashboards/
+ENV _TEMP_STORE=$GF_PATHS_HOME/_data
+ENV _PLUGINS=$GF_PATHS_PLUGINS
+ENV _DATA=$GF_PATHS_DATA
+
+USER root
+RUN apt update -yqq && apt install -yqq gosu
+
+
+RUN mkdir -p ${_TEMP_STORE}/dash/ && mkdir -p ${_TEMP_STORE}/plugins/
+
 COPY --chown=grafana:grafana provisioning grafana.ini /etc/grafana/
-COPY --chown=grafana:grafana dashboards $GF_PATHS_DATA/dashboards/
+COPY --chown=grafana:grafana base_dash.json ${_TEMP_STORE}/dash/
+
 
 RUN grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install grafana-simple-json-datasource \
@@ -15,13 +25,16 @@ RUN grafana-cli plugins install grafana-clock-panel \
     # && grafana-cli plugins install petrslavotinek-carpetplot-panel << not accessible
 
 
-USER root
-VOLUME /var/lib/grafana/plugins
-RUN mkdir $GF_PATHS_HOME/plugins
-RUN bash -c 'for f in $(ls -A $GF_PATHS_PLUGINS); do mv -f "$GF_PATHS_PLUGINS/$f" $GF_PATHS_HOME/plugins && echo "moving $GF_PATHS_PLUGINS/$f -> $GF_PATHS_HOME/plugins" ; done'
-RUN chown -R grafana:grafana $GF_PATHS_HOME
-RUN ls $GF_PATHS_HOME/plugins
+RUN echo "_TEMP_STORE:${_TEMP_STORE}"
+# RUN chown -R grafana:grafana $_PLUGINS
+# RUN chown -R grafana:grafana ${_TEMP_STORE}/plugins
+RUN bash -c 'for f in $(ls -A $_PLUGINS); do mv -f "$_PLUGINS/$f" ${_TEMP_STORE}/plugins && echo "moving $_PLUGINS/$f -> ${_TEMP_STORE}/plugins" ; done'
+# RUN chown -R grafana:grafana ${_DATA}/plugins
+RUN echo "Plugins in ${_TEMP_STORE}/plugins" && ls ${_TEMP_STORE}/plugins
 
+RUN chown -R grafana:grafana ${_TEMP_STORE} ${_PLUGINS} ${_DATA}
+
+ARG hz=1
 COPY run2.sh run2.sh
 
 USER grafana

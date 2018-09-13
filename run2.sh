@@ -1,17 +1,18 @@
 #!/bin/bash -e
 
-echo "$GF_PATHS_HOME/plugins"
-ls -l $GF_PATHS_HOME/plugins
-echo "$GF_PATHS_PLUGINS"
-find $GF_PATHS_PLUGINS
+echo "{_TEMP_STORE}/plugins: ${_TEMP_STORE}/plugins"
+echo $(ls -la ${_TEMP_STORE}/plugins)
+echo "{_PLUGINS}: ${_PLUGINS}"
+ls -la $_PLUGINS
 
-# for f in $(ls -A $GF_PATHS_HOME/plugins); do mv "$GF_PATHS_HOME/plugins/$f" $GF_PATHS_PLUGINS ; done
-chown -R grafana:grafana $GF_PATHS_PLUGINS
-chown -R grafana:grafana $GF_PATHS_HOME
+if [ ! -d "$GF_PATHS_PLUGINS" ]; then
+    mkdir "$GF_PATHS_PLUGINS"
+fi
 
-echo "List plugins"
+echo "{_PLUGINS}/2: ${_PLUGINS}"
+ls -la $_PLUGINS
 
-
+# for f in $(ls -A ${_TEMP_STORE}/plugins); do echo "${_TEMP_STORE}/plugins -> ${_PLUGINS}/$f" && mv -u "${_PLUGINS}/$f" $_PLUGINS ; done
 
 
 exec ./run.sh
