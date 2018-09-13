@@ -12,7 +12,7 @@ fi
 echo "{_PLUGINS}/2: ${_PLUGINS}"
 ls -la $_PLUGINS
 
-# for f in $(ls -A ${_TEMP_STORE}/plugins); do echo "${_TEMP_STORE}/plugins -> ${_PLUGINS}/$f" && mv -u "${_PLUGINS}/$f" $_PLUGINS ; done
+for f in $(ls -A ${_TEMP_STORE}/plugins); do echo "${_TEMP_STORE}/plugins -> ${_PLUGINS}/$f" && mv -u "${_TEMP_STORE}/plugins/$f" $_PLUGINS ; done
 
 
 exec ./run.sh
