@@ -1,9 +1,10 @@
 #!/bin/bash -e
 
-if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then
+
+if [ ! -z "${ALT_GF_INSTALL_PLUGINS}" ]; then
   OLDIFS=$IFS
   IFS=','
-  for plugin in ${GF_INSTALL_PLUGINS}; do
+  for plugin in ${ALT_GF_INSTALL_PLUGINS}; do
     IFS=$OLDIFS
     if [[ $plugin =~ .*\;.* ]]; then
         pluginUrl=$(echo "$plugin" | cut -d';' -f 1)
