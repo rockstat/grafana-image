@@ -4,6 +4,14 @@ ARG GRAFANA_VERSION="latest"
 
 FROM grafana/grafana:${GRAFANA_VERSION}
 
+ENV GF_PATHS_PLUGINS=$GF_PATHS_HOME/plugins
+
+USER root
+
+RUN mkdir -p $GF_PATHS_PLUGINS \
+    && chown grafana:grafana $GF_PATHS_PLUGINS \
+    && chmod 0777 $GF_PATHS_PLUGINS
+
 USER grafana
 
 COPY provisioning/dashboards/all.yml \
