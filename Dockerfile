@@ -1,9 +1,8 @@
 # https://github.com/grafana/grafana/blob/master/Dockerfile
 
-ARG GRAFANA_VERSION="latest"
-
 FROM grafana/grafana:${GRAFANA_VERSION}
 
+ARG GRAFANA_VERSION="latest"
 ENV GF_PATHS_PLUGINS=$GF_PATHS_HOME/plugins
 
 USER root
