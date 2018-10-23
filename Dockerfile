@@ -21,7 +21,7 @@ COPY grafana.ini $GF_PATHS_CONFIG
 
 ARG RS_GF_INSTALL_PLUGINS="vertamedia-clickhouse-datasource,grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,jdbranham-diagram-panel,raintank-worldping-app,ryantxu-ajax-panel,natel-discrete-panel"
 
-RUN if [ ! -z "${RS_GF_INSTALL_PLUGINS}" ]; then \
+RUN set -e && if [ ! -z "${RS_GF_INSTALL_PLUGINS}" ]; then \
         OLDIFS=$IFS; \
             IFS=','; \
         for plugin in ${RS_GF_INSTALL_PLUGINS}; do \
