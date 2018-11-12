@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "CH",
+      "name": "DS_CH",
       "label": "CH",
       "description": "",
       "type": "datasource",
@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.2.3"
+      "version": "5.3.2"
     },
     {
       "type": "panel",
@@ -44,7 +44,7 @@
       "type": "datasource",
       "id": "vertamedia-clickhouse-datasource",
       "name": "ClickHouse",
-      "version": "1.6.0"
+      "version": "1.7.0"
     }
   ],
   "annotations": {
@@ -74,7 +74,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "60%",
       "format": "short",
@@ -112,7 +112,7 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((sxgeo_country_en, amount))\nFROM\n(\n    SELECT\n        sxgeo_country_en,\n        uniq(uid) AS amount\n    FROM $table\n    WHERE $timeFilter and name = 'session'\n    GROUP BY sxgeo_country_en\n    ORDER BY amount desc\n    LIMIT 5\n)",
-          "rawQuery": "SELECT     1,     groupArray((sxgeo_country_en, amount)) FROM (     SELECT         sxgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and name = 'session'     GROUP BY sxgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
+          "rawQuery": "SELECT     1,     groupArray((sxgeo_country_en, amount)) FROM (     SELECT         sxgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and name = 'session'     GROUP BY sxgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -132,7 +132,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "60%",
       "format": "short",
@@ -169,7 +169,7 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((sxgeo_city_en, amount))\nFROM\n(\n    SELECT\n        sxgeo_city_en,\n        uniq(uid) AS amount\n    FROM $table\n    WHERE $timeFilter and sxgeo_country_iso = 'RU' and name = 'session'\n    GROUP BY sxgeo_city_en\n    ORDER BY amount desc\n    LIMIT 5\n)",
-          "rawQuery": "SELECT     1,     groupArray((sxgeo_city_en, amount)) FROM (     SELECT         sxgeo_city_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and sxgeo_country_iso = 'RU' and name = 'session'     GROUP BY sxgeo_city_en     ORDER BY amount desc     LIMIT 5 )",
+          "rawQuery": "SELECT     1,     groupArray((sxgeo_city_en, amount)) FROM (     SELECT         sxgeo_city_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and sxgeo_country_iso = 'RU' and name = 'session'     GROUP BY sxgeo_city_en     ORDER BY amount desc     LIMIT 5 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -189,7 +189,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -227,7 +227,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((mmgeo_country_en, amount))\nFROM\n(\n    SELECT\n        mmgeo_country_en,\n        uniq(uid) AS amount\n    FROM $table\n    WHERE $timeFilter and name = 'session'\n    GROUP BY mmgeo_country_en\n    ORDER BY amount desc\n    LIMIT 5\n)",
-          "rawQuery": "SELECT     1,     groupArray((mmgeo_country_en, amount)) FROM (     SELECT         mmgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and name = 'session'     GROUP BY mmgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
+          "rawQuery": "SELECT     1,     groupArray((mmgeo_country_en, amount)) FROM (     SELECT         mmgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and name = 'session'     GROUP BY mmgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -247,7 +247,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -285,7 +285,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((mmgeo_city_en, amount))\nFROM\n(\n    SELECT\n        mmgeo_city_en,\n        uniq(uid) AS amount\n    FROM $table\n    WHERE $timeFilter and mmgeo_country_iso = 'RU' and name = 'session'\n    GROUP BY mmgeo_city_en\n    ORDER BY amount desc\n    LIMIT 5\n)",
-          "rawQuery": "SELECT     1,     groupArray((mmgeo_city_en, amount)) FROM (     SELECT         mmgeo_city_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and mmgeo_country_iso = 'RU' and name = 'session'     GROUP BY mmgeo_city_en     ORDER BY amount desc     LIMIT 5 )",
+          "rawQuery": "SELECT     1,     groupArray((mmgeo_city_en, amount)) FROM (     SELECT         mmgeo_city_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and mmgeo_country_iso = 'RU' and name = 'session'     GROUP BY mmgeo_city_en     ORDER BY amount desc     LIMIT 5 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -305,7 +305,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "80%",
       "format": "short",
@@ -347,7 +347,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((sess_type,  Events))\nFROM\n(\n    SELECT\n        sess_type,\n        count() AS Events\n    FROM $table\n    WHERE $timeFilter AND name = 'session'\n    GROUP BY sess_type\n    ORDER BY Events desc\n    LIMIT 10\n)",
-          "rawQuery": "SELECT     1,     groupArray((sess_type,  Events)) FROM (     SELECT         sess_type,         count() AS Events     FROM stats.events     WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) AND name = 'session'     GROUP BY sess_type     ORDER BY Events desc     LIMIT 10 )",
+          "rawQuery": "SELECT     1,     groupArray((sess_type,  Events)) FROM (     SELECT         sess_type,         count() AS Events     FROM stats.events     WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) AND name = 'session'     GROUP BY sess_type     ORDER BY Events desc     LIMIT 10 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -368,7 +368,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -431,7 +431,7 @@
           "interval": "30m",
           "intervalFactor": 1,
           "query": "    SELECT\n        $timeSeries t,\n        uniq(uid) as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'session'\n    GROUP BY t\n    ORDER BY t",
-          "rawQuery": "    SELECT         (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 t,         uniq(uid) as amount     FROM stats.events     WHERE         date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and name = 'session'     GROUP BY t     ORDER BY t",
+          "rawQuery": "    SELECT         (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 t,         uniq(uid) as amount     FROM stats.events     WHERE         date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and name = 'session'     GROUP BY t     ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -460,7 +460,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -523,7 +523,7 @@
           "interval": "30m",
           "intervalFactor": 1,
           "query": "    SELECT\n        $timeSeries t,\n        count() as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'page'\n    GROUP BY t\n    ORDER BY t",
-          "rawQuery": "    SELECT         (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and name = 'page'     GROUP BY t     ORDER BY t",
+          "rawQuery": "    SELECT         (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and name = 'page'     GROUP BY t     ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -551,7 +551,7 @@
         "label": "Others",
         "threshold": "0"
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "70%",
       "format": "short",
@@ -593,7 +593,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((userType,  Events))\nFROM\n(\n    SELECT\n        if(sess_num = 1,  'New',  'Returning') as userType,\n        count() AS Events\n    FROM $table\n    WHERE\n        $timeFilter\n        AND name = 'session'\n    GROUP BY userType\n    ORDER BY Events desc\n    LIMIT 10\n)",
-          "rawQuery": "SELECT     1,     groupArray((userType,  Events)) FROM (     SELECT         if(sess_num = 1,  'New',  'Returning') as userType,         count() AS Events     FROM stats.events     WHERE         date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553)         AND name = 'session'     GROUP BY userType     ORDER BY Events desc     LIMIT 10 )",
+          "rawQuery": "SELECT     1,     groupArray((userType,  Events)) FROM (     SELECT         if(sess_num = 1,  'New',  'Returning') as userType,         count() AS Events     FROM stats.events     WHERE         date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866)         AND name = 'session'     GROUP BY userType     ORDER BY Events desc     LIMIT 10 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -610,7 +610,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -708,7 +708,7 @@
           "interval": "15m",
           "intervalFactor": 1,
           "query": "$columns(\n    name,\n    count() c)\nFROM $table",
-          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 900) * 900) * 1000 as t, name, count() c FROM stats.activity WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
+          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 900) * 900) * 1000 as t, name, count() c FROM stats.activity WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
           "refId": "B",
           "round": "0s",
           "table": "activity",
@@ -726,7 +726,7 @@
           "interval": "15m",
           "intervalFactor": 1,
           "query": "$columns(\n    name,\n    count() c)\nFROM $table",
-          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 900) * 900) * 1000 as t, name, count() c FROM stats.events WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
+          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 900) * 900) * 1000 as t, name, count() c FROM stats.events WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -778,7 +778,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -876,7 +876,7 @@
           "interval": "30m",
           "intervalFactor": 1,
           "query": "$columns(\n    name,\n    count()/uniq(uid) c)\nFROM $table",
-          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 as t, name, count() / uniq(uid) c FROM stats.activity WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
+          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 as t, name, count() / uniq(uid) c FROM stats.activity WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
           "refId": "B",
           "round": "0s",
           "table": "activity",
@@ -894,7 +894,7 @@
           "interval": "30m",
           "intervalFactor": 1,
           "query": "$columns(\n    name,\n    count()/uniq(uid) c)\nFROM $table",
-          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 as t, name, count() / uniq(uid) c FROM stats.events WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
+          "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 1800) * 1800) * 1000 as t, name, count() / uniq(uid) c FROM stats.events WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -949,7 +949,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "decimals": null,
       "fontSize": "80%",
       "format": "short",
@@ -991,7 +991,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1, /* fake timestamp value */\n    transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,\n    uniq(uid) AS amount\nFROM $table\nWHERE $timeFilter and name = 'session'\nGROUP BY grp\nORDER BY amount desc\nLIMIT 5\n\n",
-          "rawQuery": "SELECT     1, /* fake timestamp value */     transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,     uniq(uid) AS amount FROM stats.events WHERE date >= toDate(1536840553) AND dateTime >= toDateTime(1536840553) and name = 'session' GROUP BY grp ORDER BY amount desc LIMIT 5  ",
+          "rawQuery": "SELECT     1, /* fake timestamp value */     transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,     uniq(uid) AS amount FROM stats.events WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) and name = 'session' GROUP BY grp ORDER BY amount desc LIMIT 5  ",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1005,11 +1005,11 @@
     },
     {
       "columns": [],
-      "datasource": "CH",
+      "datasource": "${DS_CH}",
       "fontSize": "100%",
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 8,
+        "w": 24,
         "x": 0,
         "y": 16
       },
@@ -1019,7 +1019,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 1,
+        "col": 0,
         "desc": true
       },
       "styles": [
@@ -1028,6 +1028,22 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "t",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
         },
         {
           "alias": "",
@@ -1052,12 +1068,12 @@
           "dateTimeColDataType": "dateTime",
           "dateTimeType": "DATETIME",
           "datetimeLoading": false,
-          "format": "time_series",
+          "format": "table",
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "interval": "1d",
           "intervalFactor": 1,
-          "query": "SELECT\n    $timeSeries as t,\n    domain(page_url) as dom,\n    uniq(uid) as users\nFROM $table\nWHERE date >= today() - 5 and name = 'session'\nGROUP BY t, dom\nORDER BY dom, t",
-          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 86400) * 86400) * 1000 as t,     domain(page_url) as dom,     uniq(uid) as users FROM stats.events WHERE date >= today() - 5 and name = 'session' GROUP BY t, dom ORDER BY dom, t",
+          "query": "SELECT\n    domain(page_url) as dom,\n    uniq(uid) as users,\n    countIf(name = 'session') as sessions,\n    uniq(uid+sess_num) as sessions2,\n    count() as evends_wo_act\nFROM $table\nWHERE $timeFilter\nGROUP BY dom\nORDER BY dom",
+          "rawQuery": "SELECT     domain(page_url) as dom,     uniq(uid) as users,     countIf(name = 'session') as sessions,     uniq(uid+sess_num) as sessions2,     count() as evends_wo_act FROM stats.events WHERE date >= toDate(1541735866) AND dateTime >= toDateTime(1541735866) GROUP BY dom ORDER BY dom",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1065,72 +1081,7 @@
         }
       ],
       "title": "Domains, dates uniq users",
-      "transform": "timeseries_to_rows",
-      "type": "table"
-    },
-    {
-      "columns": [],
-      "datasource": "CH",
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 16
-      },
-      "id": 17,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 1,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "database": "stats",
-          "dateColDataType": "date",
-          "dateLoading": false,
-          "dateTimeColDataType": "dateTime",
-          "dateTimeType": "DATETIME",
-          "datetimeLoading": false,
-          "format": "time_series",
-          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-          "interval": "1d",
-          "intervalFactor": 1,
-          "query": "SELECT\n    $timeSeries as t,\n    domain(page_url) as dom,\n    count()\nFROM $table\nWHERE date >= today() - 5 and name = 'session'\nGROUP BY t, dom\nORDER BY dom, t",
-          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 86400) * 86400) * 1000 as t,     domain(page_url) as dom,     count() FROM stats.events WHERE date >= today() - 5 and name = 'session' GROUP BY t, dom ORDER BY dom, t",
-          "refId": "A",
-          "round": "0s",
-          "table": "events",
-          "tableLoading": false
-        }
-      ],
-      "title": "Domains, dates uniq sessions",
-      "transform": "timeseries_to_rows",
+      "transform": "table",
       "type": "table"
     }
   ],
@@ -1142,7 +1093,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1173,5 +1124,5 @@
   "timezone": "",
   "title": "Demo dashboard",
   "uid": "BGykpYOik",
-  "version": 62
+  "version": 11
 }
