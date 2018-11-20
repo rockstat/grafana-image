@@ -5,8 +5,8 @@ providers:
   orgId: 1
   folder: 'demo'
   type: file
-  disableDeletion: true
-  updateIntervalSeconds: 5 #how often Grafana will scan for changed dashboards
+  disableDeletion: false
+  updateIntervalSeconds: 60 #how often Grafana will scan for changed dashboards
   options:
     path: /etc/grafana/provisioning/dashboards
       #/var/lib/grafana/dashboards
