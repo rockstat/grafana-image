@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_CH",
+      "name": "CH",
       "label": "CH",
       "description": "",
       "type": "datasource",
@@ -1850,5 +1850,5 @@
   "timezone": "",
   "title": "Demo dashboard v3",
   "uid": "BGykpYO11",
-  "version": 108
+  "version": 109
 }
