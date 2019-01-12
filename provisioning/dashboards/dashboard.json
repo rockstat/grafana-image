@@ -1,3 +1,4 @@
+
 {
   "annotations": {
     "list": [
@@ -7,11 +8,7 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "limit": 100,
         "name": "Annotations & Alerts",
-        "query": "SELECT\n  toUInt32(toDateTime(ts)) * 1000 AS time,\n  description AS text,\n  tags\nFROM\n  event_table\nWHERE\n  ts >= $from AND ts < $to\n",
-        "rawQuery": "SELECT   toUInt32(toDateTime(ts)) * 1000 AS time,   description AS text,   tags FROM   event_table WHERE   ts >= 1542540134 AND ts < 1542626534",
-        "showIn": 0,
         "type": "dashboard"
       }
     ]
@@ -19,9 +16,18 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 12,
-  "iteration": 1544052268981,
-  "links": [],
+  "id": 18,
+  "iteration": 1547285115971,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "tags": [],
+      "targetBlank": true,
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
       "collapsed": false,
@@ -41,34 +47,36 @@
         "digitalgod.be": "#aea2e0",
         "rock.st": "#6ed0e0"
       },
-      "bars": true,
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "CH",
+      "decimals": null,
       "fill": 1,
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 10,
         "x": 0,
         "y": 1
       },
       "id": 20,
       "legend": {
-        "alignAsTable": true,
+        "alignAsTable": false,
         "avg": false,
         "current": false,
-        "hideEmpty": false,
+        "hideEmpty": true,
         "hideZero": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
+        "sideWidth": null,
         "sort": null,
         "sortDesc": null,
         "total": true,
         "values": true
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
@@ -78,8 +86,8 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
+      "stack": false,
+      "steppedLine": true,
       "targets": [
         {
           "database": "stats",
@@ -93,7 +101,7 @@
           "interval": "$step",
           "intervalFactor": 1,
           "query": "SELECT\n    $timeSeries t,\n    domain(page_url) as dom,\n    uniq(uid) as users\nFROM $table\nWHERE\n    $timeFilter and name = 'session' and $ev_filter\nGROUP BY t, dom\nORDER BY t, dom",
-          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     uniq(uid) as users FROM stats.events WHERE     date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
+          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     uniq(uid) as users FROM stats.events WHERE     date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
           "refId": "B",
           "round": "0s",
           "table": "events",
@@ -102,6 +110,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Sites / users",
       "tooltip": {
@@ -143,37 +152,37 @@
     },
     {
       "aliasColors": {
-        "best-new.online": "#f29191",
         "digitalgod.be": "#aea2e0",
-        "rock.st": "#70dbed"
+        "rock.st": "#6ed0e0"
       },
-      "bars": true,
+      "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "CH",
       "fill": 1,
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 10,
         "x": 10,
         "y": 1
       },
-      "id": 26,
+      "id": 41,
       "legend": {
-        "alignAsTable": true,
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "hideEmpty": false,
         "hideZero": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
-        "sortDesc": true,
+        "sort": null,
+        "sortDesc": null,
         "total": true,
         "values": true
       },
-      "lines": false,
+      "lines": true,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
@@ -183,8 +192,8 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
+      "stack": false,
+      "steppedLine": true,
       "targets": [
         {
           "database": "stats",
@@ -197,18 +206,19 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "interval": "$step",
           "intervalFactor": 1,
-          "query": "SELECT\n    $timeSeries t,\n    domain(page_url) as dom,\n    count() as sessions\nFROM $table\nWHERE\n    $timeFilter and name = 'session'  and $ev_filter\nGROUP BY t, dom\nORDER BY t, dom",
-          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     count() as sessions FROM stats.events WHERE     date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
+          "query": "SELECT\n    $timeSeries t,\n    domain(page_url) as dom,\n    uniq(uid) as users\nFROM $table\nWHERE\n    $timeFilter and $ev_filter\nGROUP BY t, dom\nORDER BY t, dom",
+          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     uniq(uid) as users FROM stats.activity WHERE     date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
           "refId": "B",
           "round": "0s",
-          "table": "events",
+          "table": "activity",
           "tableLoading": false
         }
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Sites / sessions",
+      "title": "Sites / users by act",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -225,18 +235,16 @@
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "short",
-          "label": "",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": "",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
@@ -251,6 +259,8 @@
     {
       "cacheTimeout": null,
       "colorBackground": false,
+      "colorPostfix": false,
+      "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
@@ -304,7 +314,7 @@
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
         "lineColor": "rgb(31, 120, 193)",
-        "show": true
+        "show": false
       },
       "tableColumn": "",
       "targets": [
@@ -319,8 +329,8 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "interval": "$step",
           "intervalFactor": 1,
-          "query": "    SELECT\n        $timeSeries t,\n        uniq(uid) as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'session' and $ev_filter\n    GROUP BY t\n    ORDER BY t",
-          "rawQuery": "SELECT         (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,         uniq(uid) as amount     FROM stats.events     WHERE         date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY t     ORDER BY t",
+          "query": "    SELECT\n        1 as t,\n        uniq(uid) as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'session' and $ev_filter",
+          "rawQuery": "SELECT         1 as t,         uniq(uid) as amount     FROM stats.events     WHERE         date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -328,7 +338,7 @@
         }
       ],
       "thresholds": "",
-      "title": "Users",
+      "title": "Users Total RST",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -412,8 +422,8 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "interval": "$step",
           "intervalFactor": 1,
-          "query": "    SELECT\n        $timeSeries t,\n        count() as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'session' and $ev_filter\n    GROUP BY t\n    ORDER BY t",
-          "rawQuery": "SELECT         (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY t     ORDER BY t",
+          "query": "    SELECT\n        1 t,\n        count() as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'session' and $ev_filter\n    GROUP BY t\n    ORDER BY t",
+          "rawQuery": "SELECT         1 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY t     ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -506,7 +516,7 @@
           "interval": "$step",
           "intervalFactor": 1,
           "query": "    SELECT\n        $timeSeries t,\n        count() as amount\n    FROM $table\n    WHERE\n        $timeFilter and name = 'page' and $ev_filter\n    GROUP BY t\n    ORDER BY t",
-          "rawQuery": "SELECT         (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'page' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY t     ORDER BY t",
+          "rawQuery": "SELECT         (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,         count() as amount     FROM stats.events     WHERE         date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'page' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY t     ORDER BY t",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -529,6 +539,221 @@
     },
     {
       "aliasColors": {
+        "digitalgod.be": "#aea2e0",
+        "rock.st": "#6ed0e0"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CH",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 10,
+        "x": 0,
+        "y": 8
+      },
+      "id": 39,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": null,
+        "sort": null,
+        "sortDesc": null,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "database": "stats",
+          "dateColDataType": "date",
+          "dateLoading": false,
+          "dateTimeColDataType": "dateTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "$step",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries t,\n    domain(page_url) as dom,\n    uniq(uid) as users\nFROM $table\nWHERE\n    $timeFilter and name = 'session' and sess_num = 1 and $ev_filter\nGROUP BY t, dom\nORDER BY t, dom",
+          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     uniq(uid) as users FROM stats.events WHERE     date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_num = 1 and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
+          "refId": "B",
+          "round": "0s",
+          "table": "events",
+          "tableLoading": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Sites NEW users",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "best-new.online": "#f29191",
+        "digitalgod.be": "#aea2e0",
+        "rock.st": "#70dbed"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CH",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 10,
+        "x": 10,
+        "y": 8
+      },
+      "id": 26,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "sortDesc": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "database": "stats",
+          "dateColDataType": "date",
+          "dateLoading": false,
+          "dateTimeColDataType": "dateTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "$step",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries t,\n    domain(page_url) as dom,\n    count() as sessions\nFROM $table\nWHERE\n    $timeFilter and name = 'session'  and $ev_filter\nGROUP BY t, dom\nORDER BY t, dom",
+          "rawQuery": "SELECT     (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 t,     domain(page_url) as dom,     count() as sessions FROM stats.events WHERE     date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY t, dom ORDER BY t, dom",
+          "refId": "B",
+          "round": "0s",
+          "table": "events",
+          "tableLoading": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Sites / sessions",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
         "Germany": "#e5a8e2",
         "Russia": "#70dbed",
         "Sweden": "#f9d9f9",
@@ -547,9 +772,9 @@
       "format": "short",
       "gridPos": {
         "h": 10,
-        "w": 5,
+        "w": 4,
         "x": 0,
-        "y": 9
+        "y": 15
       },
       "id": 3,
       "interval": null,
@@ -579,7 +804,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((mmgeo_country_en, amount))\nFROM\n(\n    SELECT\n        mmgeo_country_en,\n        uniq(uid) AS amount\n    FROM $table\n    WHERE $timeFilter and name = 'session'  and $ev_filter\n    GROUP BY mmgeo_country_en\n    ORDER BY amount desc\n    LIMIT 5\n)",
-          "rawQuery": "SELECT     1,     groupArray((mmgeo_country_en, amount)) FROM (     SELECT         mmgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY mmgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
+          "rawQuery": "SELECT     1,     groupArray((mmgeo_country_en, amount)) FROM (     SELECT         mmgeo_country_en,         uniq(uid) AS amount     FROM stats.events     WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY mmgeo_country_en     ORDER BY amount desc     LIMIT 5 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -613,8 +838,8 @@
       "gridPos": {
         "h": 10,
         "w": 5,
-        "x": 5,
-        "y": 9
+        "x": 4,
+        "y": 15
       },
       "hideTimeOverride": false,
       "id": 11,
@@ -648,7 +873,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((sess_type,  Events))\nFROM\n(\n    SELECT\n        sess_type,\n        count() AS Events\n    FROM $table\n    WHERE $timeFilter AND name = 'session' and $ev_filter\n    GROUP BY sess_type\n    ORDER BY Events desc\n    LIMIT 10\n)",
-          "rawQuery": "SELECT     1,     groupArray((sess_type,  Events)) FROM (     SELECT         sess_type,         count() AS Events     FROM stats.events     WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) AND name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY sess_type     ORDER BY Events desc     LIMIT 10 )",
+          "rawQuery": "SELECT     1,     groupArray((sess_type,  Events)) FROM (     SELECT         sess_type,         count() AS Events     FROM stats.events     WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) AND name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY sess_type     ORDER BY Events desc     LIMIT 10 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -678,8 +903,8 @@
       "gridPos": {
         "h": 10,
         "w": 5,
-        "x": 10,
-        "y": 9
+        "x": 9,
+        "y": 15
       },
       "hideTimeOverride": false,
       "id": 10,
@@ -713,7 +938,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1,\n    groupArray((userType,  Events))\nFROM\n(\n    SELECT\n        if(sess_num = 1,  'New',  'Returning') as userType,\n        count() AS Events\n    FROM $table\n    WHERE\n        $timeFilter\n        AND name = 'session' and $ev_filter\n    GROUP BY userType\n    ORDER BY Events desc\n    LIMIT 10\n)",
-          "rawQuery": "SELECT     1,     groupArray((userType,  Events)) FROM (     SELECT         if(sess_num = 1,  'New',  'Returning') as userType,         count() AS Events     FROM stats.events     WHERE         date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927)         AND name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY userType     ORDER BY Events desc     LIMIT 10 )",
+          "rawQuery": "SELECT     1,     groupArray((userType,  Events)) FROM (     SELECT         if(sess_num = 1,  'New',  'Returning') as userType,         count() AS Events     FROM stats.events     WHERE         date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715)         AND name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1     GROUP BY userType     ORDER BY Events desc     LIMIT 10 )",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -743,9 +968,9 @@
       "format": "short",
       "gridPos": {
         "h": 10,
-        "w": 5,
-        "x": 15,
-        "y": 9
+        "w": 4,
+        "x": 14,
+        "y": 15
       },
       "hideTimeOverride": false,
       "id": 6,
@@ -779,7 +1004,7 @@
           "interval": "",
           "intervalFactor": 1,
           "query": "SELECT\n    1, /* fake timestamp value */\n    transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,\n    uniq(uid) AS amount\nFROM $table\nWHERE $timeFilter and name = 'session' and $ev_filter\nGROUP BY grp\nORDER BY amount desc\nLIMIT 5\n\n",
-          "rawQuery": "SELECT     1, /* fake timestamp value */     transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,     uniq(uid) AS amount FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY grp ORDER BY amount desc LIMIT 5",
+          "rawQuery": "SELECT     1, /* fake timestamp value */     transform(uaparser_is_mob*3 + uaparser_is_pc*8, [8, 3], ['PC', 'Mobile'], 'Strange') as grp,     uniq(uid) AS amount FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY grp ORDER BY amount desc LIMIT 5",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -792,368 +1017,16 @@
       "valueName": "total"
     },
     {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 19
-      },
-      "id": 34,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "CH",
-          "fill": 1,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 20
-          },
-          "id": 5,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": false,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "session",
-              "color": "#705da0"
-            },
-            {
-              "alias": "activity",
-              "bars": false,
-              "color": "#cffaff",
-              "lines": true,
-              "stack": "D"
-            },
-            {
-              "alias": "scroll",
-              "bars": false,
-              "color": "#badff4",
-              "lines": true,
-              "stack": "D"
-            },
-            {
-              "alias": "field_blur",
-              "color": "#e5a8e2"
-            },
-            {
-              "alias": "field_focus",
-              "color": "#dedaf7"
-            },
-            {
-              "alias": "field_change",
-              "color": "#badff4"
-            },
-            {
-              "alias": "form_submit",
-              "color": "#ef843c"
-            },
-            {
-              "alias": "page",
-              "color": "#629e51"
-            },
-            {
-              "alias": "page_loaded",
-              "color": "#e0f9d7"
-            },
-            {
-              "alias": "page_unload",
-              "color": "#b7dbab"
-            },
-            {
-              "alias": "link_click",
-              "color": "#1f78c1"
-            }
-          ],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "database": "stats",
-              "dateColDataType": "date",
-              "dateLoading": false,
-              "dateTimeColDataType": "dateTime",
-              "dateTimeType": "DATETIME",
-              "datetimeLoading": false,
-              "format": "time_series",
-              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "interval": "$step",
-              "intervalFactor": 1,
-              "query": "$columns(\n    name,\n    count() c)\nFROM $table",
-              "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 as t, name, count() c FROM stats.activity WHERE date >= toDate(1542252029) AND dateTime >= toDateTime(1542252029) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
-              "refId": "B",
-              "round": "0s",
-              "table": "activity",
-              "tableLoading": false
-            },
-            {
-              "database": "stats",
-              "dateColDataType": "date",
-              "dateLoading": false,
-              "dateTimeColDataType": "dateTime",
-              "dateTimeType": "DATETIME",
-              "datetimeLoading": false,
-              "format": "time_series",
-              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "interval": "$step",
-              "intervalFactor": 1,
-              "query": "$columns(\n    name,\n    count() c)\nFROM $table",
-              "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 as t, name, count() c FROM stats.events WHERE date >= toDate(1542252029) AND dateTime >= toDateTime(1542252029) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
-              "refId": "A",
-              "round": "0s",
-              "table": "events",
-              "tableLoading": false
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Events",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "CH",
-          "fill": 1,
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 20
-          },
-          "id": 7,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": false,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "session",
-              "color": "#705da0"
-            },
-            {
-              "alias": "activity",
-              "bars": false,
-              "color": "#cffaff",
-              "lines": true,
-              "stack": "D"
-            },
-            {
-              "alias": "scroll",
-              "bars": false,
-              "color": "#badff4",
-              "lines": true,
-              "stack": "D"
-            },
-            {
-              "alias": "field_blur",
-              "color": "#e5a8e2"
-            },
-            {
-              "alias": "field_focus",
-              "color": "#dedaf7"
-            },
-            {
-              "alias": "field_change",
-              "color": "#badff4"
-            },
-            {
-              "alias": "form_submit",
-              "color": "#ef843c"
-            },
-            {
-              "alias": "page",
-              "color": "#629e51"
-            },
-            {
-              "alias": "page_loaded",
-              "color": "#e0f9d7"
-            },
-            {
-              "alias": "page_unload",
-              "color": "#b7dbab"
-            },
-            {
-              "alias": "link_click",
-              "color": "#1f78c1"
-            }
-          ],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "database": "stats",
-              "dateColDataType": "date",
-              "dateLoading": false,
-              "dateTimeColDataType": "dateTime",
-              "dateTimeType": "DATETIME",
-              "datetimeLoading": false,
-              "format": "time_series",
-              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "interval": "$step",
-              "intervalFactor": 1,
-              "query": "$columns(\n    name,\n    count()/uniq(uid) c)\nFROM $table",
-              "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 as t, name, count() / uniq(uid) c FROM stats.activity WHERE date >= toDate(1542252029) AND dateTime >= toDateTime(1542252029) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
-              "refId": "B",
-              "round": "0s",
-              "table": "activity",
-              "tableLoading": false
-            },
-            {
-              "database": "stats",
-              "dateColDataType": "date",
-              "dateLoading": false,
-              "dateTimeColDataType": "dateTime",
-              "dateTimeType": "DATETIME",
-              "datetimeLoading": false,
-              "format": "time_series",
-              "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "interval": "$step",
-              "intervalFactor": 1,
-              "query": "$columns(\n    name,\n    count()/uniq(uid) c)\nFROM $table",
-              "rawQuery": "SELECT t, groupArray((name, c)) as groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 as t, name, count() / uniq(uid) c FROM stats.events WHERE date >= toDate(1542252029) AND dateTime >= toDateTime(1542252029) GROUP BY t, name  ORDER BY t, name) GROUP BY t ORDER BY t",
-              "refId": "A",
-              "round": "0s",
-              "table": "events",
-              "tableLoading": false
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Events / Users",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
-      "title": "Events amount",
-      "type": "row"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 25
       },
-      "id": 31,
+      "id": 43,
       "panels": [],
-      "title": "Sources",
+      "title": "Sources details",
       "type": "row"
     },
     {
@@ -1164,7 +1037,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 26
       },
       "id": 16,
       "links": [],
@@ -1226,7 +1099,7 @@
           "interval": "1d",
           "intervalFactor": 1,
           "query": "SELECT\n    domain(page_url) as dom,\n    uniq(uid) as users,\n    countIf(name = 'session') as sessions,\n    uniq(uid+sess_num) as sessions2,\n    count() as evends_wo_act\nFROM $table\nWHERE $timeFilter  and $ev_filter\nGROUP BY dom\nORDER BY dom",
-          "rawQuery": "SELECT     domain(page_url) as dom,     uniq(uid) as users,     countIf(name = 'session') as sessions,     uniq(uid+sess_num) as sessions2,     count() as evends_wo_act FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927)  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY dom ORDER BY dom",
+          "rawQuery": "SELECT     domain(page_url) as dom,     uniq(uid) as users,     countIf(name = 'session') as sessions,     uniq(uid+sess_num) as sessions2,     count() as evends_wo_act FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715)  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY dom ORDER BY dom",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1246,7 +1119,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 26
       },
       "id": 19,
       "links": [],
@@ -1314,7 +1187,7 @@
           "interval": "1d",
           "intervalFactor": 1,
           "query": "SELECT\n    domain(page_url) as dom,\n    sess_type as stype,\n    sess_engine as engine,\n    path(page_url) as ppath,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and (sess_type = 'organic' or sess_type == 'social') and $ev_filter\nGROUP BY engine, dom, stype, ppath\nORDER BY users DESC",
-          "rawQuery": "SELECT     domain(page_url) as dom,     sess_type as stype,     sess_engine as engine,     path(page_url) as ppath,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and (sess_type = 'organic' or sess_type == 'social') and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY engine, dom, stype, ppath ORDER BY users DESC",
+          "rawQuery": "SELECT     domain(page_url) as dom,     sess_type as stype,     sess_engine as engine,     path(page_url) as ppath,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and (sess_type = 'organic' or sess_type == 'social') and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY engine, dom, stype, ppath ORDER BY users DESC",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1331,10 +1204,10 @@
       "datasource": "CH",
       "fontSize": "100%",
       "gridPos": {
-        "h": 10,
-        "w": 12,
+        "h": 11,
+        "w": 23,
         "x": 0,
-        "y": 31
+        "y": 36
       },
       "id": 18,
       "links": [],
@@ -1342,7 +1215,7 @@
       "scroll": false,
       "showHeader": true,
       "sort": {
-        "col": 5,
+        "col": 6,
         "desc": true
       },
       "styles": [
@@ -1399,8 +1272,8 @@
           "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
           "interval": "1d",
           "intervalFactor": 1,
-          "query": "SELECT\n    domain(page_url) as dom,\n    sess_marks_utm_source as utm_source,\n    sess_marks_utm_campaign as utm_campaing,\n    sess_marks_utm_medium as utm_medium,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and sess_type = 'campaign' and $ev_filter\nGROUP BY utm_source, utm_campaing, utm_medium, dom\nORDER BY users",
-          "rawQuery": "SELECT     domain(page_url) as dom,     sess_marks_utm_source as utm_source,     sess_marks_utm_campaign as utm_campaing,     sess_marks_utm_medium as utm_medium,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_type = 'campaign' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY utm_source, utm_campaing, utm_medium, dom ORDER BY users",
+          "query": "SELECT\n    domain(page_url) as dom,\n    sess_marks_utm_source as utm_source,\n    sess_marks_utm_campaign as utm_campaing,\n    sess_marks_utm_medium as utm_medium,\n    sess_marks_utm_term as utm_term,\n    sess_marks_utm_content as utm_content,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and sess_type = 'campaign' and $ev_filter\nGROUP BY utm_source, utm_campaing, utm_medium, utm_term, utm_content, dom\nORDER BY users",
+          "rawQuery": "SELECT     domain(page_url) as dom,     sess_marks_utm_source as utm_source,     sess_marks_utm_campaign as utm_campaing,     sess_marks_utm_medium as utm_medium,     sess_marks_utm_term as utm_term,     sess_marks_utm_content as utm_content,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_type = 'campaign' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY utm_source, utm_campaing, utm_medium, utm_term, utm_content, dom ORDER BY users",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1419,90 +1292,8 @@
       "gridPos": {
         "h": 10,
         "w": 12,
-        "x": 12,
-        "y": 31
-      },
-      "id": 17,
-      "links": [],
-      "pageSize": 10,
-      "scroll": false,
-      "showHeader": true,
-      "sort": {
-        "col": 2,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "t",
-          "thresholds": [],
-          "type": "date",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "database": "stats",
-          "dateColDataType": "date",
-          "dateLoading": false,
-          "dateTimeColDataType": "dateTime",
-          "dateTimeType": "DATETIME",
-          "datetimeLoading": false,
-          "format": "table",
-          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-          "interval": "$step",
-          "intervalFactor": 1,
-          "query": "SELECT\n    domain(page_url) as dom,\n    sess_refhost as refhost,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and sess_type = 'referral'  and $ev_filter\nGROUP BY sess_refhost, dom\nORDER BY users",
-          "rawQuery": "SELECT     domain(page_url) as dom,     sess_refhost as refhost,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_type = 'referral'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY sess_refhost, dom ORDER BY users",
-          "refId": "A",
-          "round": "0s",
-          "table": "events",
-          "tableLoading": false
-        }
-      ],
-      "title": "Referrers",
-      "transform": "table",
-      "transparent": true,
-      "type": "table"
-    },
-    {
-      "columns": [],
-      "datasource": "CH",
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 10,
-        "w": 12,
         "x": 0,
-        "y": 41
+        "y": 47
       },
       "id": 21,
       "links": [],
@@ -1564,7 +1355,7 @@
           "interval": "1d",
           "intervalFactor": 1,
           "query": "SELECT\n    domain(page_url) as dom,\n    path(page_url) as start_path,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and sess_type == 'internal' and $ev_filter\nGROUP BY dom, start_path\nORDER BY users DESC",
-          "rawQuery": "SELECT     domain(page_url) as dom,     path(page_url) as start_path,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'session' and sess_type == 'internal' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY dom, start_path ORDER BY users DESC",
+          "rawQuery": "SELECT     domain(page_url) as dom,     path(page_url) as start_path,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_type == 'internal' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY dom, start_path ORDER BY users DESC",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1581,10 +1372,105 @@
       "datasource": "CH",
       "fontSize": "100%",
       "gridPos": {
-        "h": 10,
+        "h": 11,
         "w": 12,
         "x": 12,
-        "y": 41
+        "y": 47
+      },
+      "id": 17,
+      "links": [],
+      "pageSize": 10,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "t",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "database": "stats",
+          "dateColDataType": "date",
+          "dateLoading": false,
+          "dateTimeColDataType": "dateTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "$step",
+          "intervalFactor": 1,
+          "query": "SELECT\n    domain(page_url) as dom,\n    sess_refhost as refhost,\n    uniq(uid) as users,\n    count() as sessions\nFROM $table\nWHERE $timeFilter and name = 'session' and sess_type = 'referral'  and $ev_filter\nGROUP BY sess_refhost, dom\nORDER BY users",
+          "rawQuery": "SELECT     domain(page_url) as dom,     sess_refhost as refhost,     uniq(uid) as users,     count() as sessions FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'session' and sess_type = 'referral'  and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY sess_refhost, dom ORDER BY users",
+          "refId": "A",
+          "round": "0s",
+          "table": "events",
+          "tableLoading": false
+        }
+      ],
+      "title": "Referrers",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 36,
+      "panels": [],
+      "title": "Content",
+      "type": "row"
+    },
+    {
+      "columns": [],
+      "datasource": "CH",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 59
       },
       "id": 27,
       "links": [],
@@ -1652,7 +1538,7 @@
           "interval": "1d",
           "intervalFactor": 1,
           "query": "SELECT\n    domain(page_url) as dom,\n    path(page_url) as page_path,\n    uniq(uid) as users,\n    count() as pageviews\nFROM $table\nWHERE $timeFilter and name = 'page' and $ev_filter\nGROUP BY page_path, dom\nORDER BY pageviews DESC",
-          "rawQuery": "SELECT     domain(page_url) as dom,     path(page_url) as page_path,     uniq(uid) as users,     count() as pageviews FROM stats.events WHERE date >= toDate(1543965927) AND dateTime >= toDateTime(1543965927) and name = 'page' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY page_path, dom ORDER BY pageviews DESC",
+          "rawQuery": "SELECT     domain(page_url) as dom,     path(page_url) as page_path,     uniq(uid) as users,     count() as pageviews FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) and name = 'page' and sess_refhost != 'webvisor.com' and uaparser_is_bot != 1 GROUP BY page_path, dom ORDER BY pageviews DESC",
           "refId": "A",
           "round": "0s",
           "table": "events",
@@ -1663,9 +1549,186 @@
       "transform": "table",
       "transparent": true,
       "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "CH",
+      "fill": 1,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 59
+      },
+      "id": 5,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null as zero",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "session",
+          "color": "#705da0"
+        },
+        {
+          "alias": "activity",
+          "bars": false,
+          "color": "#cffaff",
+          "lines": true,
+          "spaceLength": 5
+        },
+        {
+          "alias": "scroll",
+          "bars": false,
+          "color": "#badff4",
+          "lines": true,
+          "stack": "D"
+        },
+        {
+          "alias": "field_blur",
+          "color": "#e5a8e2"
+        },
+        {
+          "alias": "field_focus",
+          "color": "#d683ce"
+        },
+        {
+          "alias": "field_change",
+          "color": "#badff4"
+        },
+        {
+          "alias": "form_submit",
+          "color": "#ef843c"
+        },
+        {
+          "alias": "page",
+          "color": "#629e51"
+        },
+        {
+          "alias": "page_loaded",
+          "color": "#e0f9d7"
+        },
+        {
+          "alias": "page_unload",
+          "color": "#b7dbab"
+        },
+        {
+          "alias": "link_click",
+          "color": "#1f78c1"
+        },
+        {
+          "alias": "/.*/",
+          "fill": 1,
+          "lines": true,
+          "linewidth": 1
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "database": "stats",
+          "dateColDataType": "date",
+          "dateLoading": false,
+          "dateTimeColDataType": "dateTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "$step",
+          "intervalFactor": 1,
+          "query": "$columns(\n    name,\n    count() c)\nFROM $table",
+          "rawQuery": "SELECT t, groupArray((name, c)) AS groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 AS t, name, count() c FROM stats.activity WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) GROUP BY t, name ORDER BY t, name) GROUP BY t ORDER BY t",
+          "refId": "B",
+          "round": "0s",
+          "table": "activity",
+          "tableLoading": false
+        },
+        {
+          "database": "stats",
+          "dateColDataType": "date",
+          "dateLoading": false,
+          "dateTimeColDataType": "dateTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "$step",
+          "intervalFactor": 1,
+          "query": "$columns(\n    name,\n    count() c)\nFROM $table",
+          "rawQuery": "SELECT t, groupArray((name, c)) AS groupArr FROM ( SELECT (intDiv(toUInt32(dateTime), 3600) * 3600) * 1000 AS t, name, count() c FROM stats.events WHERE date >= toDate(1547198715) AND dateTime >= toDateTime(1547198715) GROUP BY t, name ORDER BY t, name) GROUP BY t ORDER BY t",
+          "refId": "A",
+          "round": "0s",
+          "table": "events",
+          "tableLoading": false
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Events",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": false,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 2,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": 7
+      }
     }
   ],
-  "refresh": "1m",
+  "refresh": false,
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -1695,7 +1758,7 @@
             "value": "30m"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "60m",
             "value": "60m"
           },
@@ -1720,7 +1783,7 @@
             "value": "12h"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1d",
             "value": "1d"
           }
@@ -1780,8 +1843,8 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "Demo dashboard v4",
+  "timezone": "utc",
+  "title": "Demo dashboard v5",
   "uid": "BGykpYO11",
-  "version": 999
+  "version": 1001
 }
