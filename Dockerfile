@@ -30,4 +30,4 @@ RUN set -e && if [ ! -z "${RS_GF_INSTALL_PLUGINS}" ]; then \
             grafana-cli --pluginsDir "$GF_PATHS_PLUGINS" plugins install ${plugin}; \
         done; \
     fi
-RUN grafana-cli --pluginUrl https://149208.selcdn.ru/dg/clickhouse-grafana.zip plugins install vertamedia-clickhouse-datasource
+RUN grafana-cli --pluginsDir "$GF_PATHS_PLUGINS" --pluginUrl https://149208.selcdn.ru/dg/clickhouse-grafana.zip plugins install vertamedia-clickhouse-datasource
