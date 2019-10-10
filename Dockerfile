@@ -19,7 +19,8 @@ COPY provisioning/datasources/all.yml \
     $GF_PATHS_PROVISIONING/datasources
 COPY grafana.ini $GF_PATHS_CONFIG
 
-ARG RS_GF_INSTALL_PLUGINS="vertamedia-clickhouse-datasource,grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,jdbranham-diagram-panel,raintank-worldping-app,ryantxu-ajax-panel,natel-discrete-panel"
+# vertamedia-clickhouse-datasource
+ARG RS_GF_INSTALL_PLUGINS="grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,jdbranham-diagram-panel,raintank-worldping-app,ryantxu-ajax-panel,natel-discrete-panel"
 
 RUN set -e && if [ ! -z "${RS_GF_INSTALL_PLUGINS}" ]; then \
         OLDIFS=$IFS; \
@@ -29,3 +30,4 @@ RUN set -e && if [ ! -z "${RS_GF_INSTALL_PLUGINS}" ]; then \
             grafana-cli --pluginsDir "$GF_PATHS_PLUGINS" plugins install ${plugin}; \
         done; \
     fi
+RUN grafana-cli --pluginUrl https://149208.selcdn.ru/dg/grafana-ch.zip plugins install vertamedia-clickhouse-datasource

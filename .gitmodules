@@ -1,0 +1,3 @@
+[submodule "clickhouse-grafana"]
+	path = clickhouse-grafana
+	url = https://github.com/Vertamedia/clickhouse-grafana
